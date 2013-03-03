@@ -33,7 +33,7 @@ This can be done in the project settings of each project:
 
 __Notice:__ If Eclipse still marks your code as invalid you may need to rebuild your index (the path, eclipse gets its libraries from) after changing the toolchain. This can be done with the following actions: `Right-click on the project root` -> `Index` -> `Rebuild`. After that you may need to restart eclipse in order to get everything work correctly again.
 
-__Second notice:__ I just found that sometimes after importing a project, Eclipse loses it's dependencies to the std lib. This issue can be resolved by enabling the checkbox `Enable language settings providers for this project` under the project settings (`Right-clieck on the project root` -> `Properties`) in the location `C/C++ General` -> `Preprocessor Include Paths, Macros, etc.` -> `Providers`
+__Second notice:__ I just found that sometimes after importing a project, Eclipse loses it's dependencies to the std lib. This issue can be resolved by enabling the checkbox `Enable language settings providers for this project` under the project settings (`Right-click on the project root` -> `Properties`) in the location `C/C++ General` -> `Preprocessor Include Paths, Macros, etc.` -> `Providers`
 Don't forget to rebuild your index afterwards.
 
 The same steps can be applied to Linux/Ubuntu but the names will probably be different. If someone can provide me with a working configuration, I'd be happy to publish it here.
