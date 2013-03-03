@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Universität Zürich. All rights reserved.
 //
 //   Authored by Remo Koch
+//   Public repository at https://github.com/rkoch/uzh-inf02b-a2
 //
 
 #ifndef stack_arraybased_stack_ab_h
