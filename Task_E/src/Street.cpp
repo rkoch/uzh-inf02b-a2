@@ -39,9 +39,6 @@ int main(int argc, const char * argv[]) {
 
 	string input;
 	while (true) {
-		// New car arriving
-		Car* car = new Car(count++);
-
 		cout << "A new car is arriving. There currently are " << (int) (lane1.size() + lane2.size()) << " cars waiting. ";
 		cout << "The light is " << (redLight ? "red" : "green") << "." << endl;
 		cout << "Do you want to toggle the light? [y/stop/any other key]: " << std::flush;
@@ -52,6 +49,9 @@ int main(int argc, const char * argv[]) {
 		} else if (input == "y") {
 			redLight = !redLight;
 		}
+
+		// New car arriving
+		Car* car = new Car(count++);
 
 		// Add new car to lane
 		placeCar(car, redLight);
