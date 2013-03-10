@@ -1,7 +1,7 @@
 Assignment 2, Task A
 ====================
 
-1) b, c, d
+1) b, d
 2) a
 3) c
 4) b (d (dequeue) would also be true - at least in the stdlib I use)
