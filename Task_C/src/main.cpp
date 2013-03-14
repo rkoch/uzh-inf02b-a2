@@ -31,6 +31,10 @@ std::stack<letter*> orderByPriority(std::stack<letter*> tray);
  * 3) declaration of letter comparator
  */
 bool letterComparator(letter* pLetter1, letter* pLetter2);
+/**
+ * 3) Additional: Another sorting algorithm
+ */
+std::stack<letter*> orderByPriority2(std::stack<letter*> pTray);
 
 std::stack<letter*> tray_work;
 std::stack<letter*> tray_family;
@@ -46,9 +50,9 @@ int main(int argc, const char * argv[]) {
 
 	printTrays();
 
-	tray_work = orderByPriority(tray_work);
-	tray_family = orderByPriority(tray_family);
-	tray_hobby = orderByPriority(tray_hobby);
+	tray_work = orderByPriority2(tray_work);
+	tray_family = orderByPriority2(tray_family);
+	tray_hobby = orderByPriority2(tray_hobby);
 
 	printTrays();
 
@@ -162,3 +166,53 @@ bool letterComparator(letter* pLetter1, letter* pLetter2) {
 	return pLetter1->getPriority() < pLetter2->getPriority();
 }
 
+/**
+ * 3) This is an alternative method of sorting the trays by priority using only stacks
+ * ATTN: This algorithm runs in O(n^2) - so it is NOT efficient.
+ */
+stack<letter*> orderByPriority2(std::stack<letter*> pTray) {
+	// The final sorted stack
+	stack<letter*> ret;
+
+	// Create temp stacks - using stack pointers here to avoid n copies of those stacks
+	stack<letter*> tmp;
+	stack<letter*>* left = &pTray;
+	stack<letter*>* right = &tmp;
+	letter* lowestPrio = NULL;
+
+	// As long as the unsorted stacks contain entries
+	while (!left->empty() || !right->empty()) {
+
+		// Move all entries from left to right and compare them
+		while (!left->empty()) {
+			letter* top = left->top();
+			left->pop();
+
+			// Get the first or the one with the lowest priority into lowestPrio
+			// Every other entry should be moved into the right unsorted stack,
+			if (lowestPrio == NULL) {
+				lowestPrio = top;
+			} else if (letterComparator(lowestPrio, top)) {
+				// On replacing the pointer to the entry with the lowest prio the old
+				// one must be pushed to the right unsorted stack as well. It will be
+				// addressed in a future iteration.
+				right->push(lowestPrio);
+				lowestPrio = top;
+			} else {
+				right->push(top);
+			}
+		}
+
+		// Push the lowest found priority to the resulting stack so it is beneath the ones
+		// with the higher priorities.
+		ret.push(lowestPrio);
+		lowestPrio = NULL;
+
+		// Change iteration direction because the left stack is now empty.
+		stack<letter*>* tmp = left;
+		left = right;
+		right = tmp;
+	}
+
+	return ret;
+}
